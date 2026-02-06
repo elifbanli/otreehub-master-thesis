@@ -1,0 +1,125 @@
+{% block content %}
+
+<style>
+.hidden-thumb::-webkit-slider-thumb { opacity: 0; }
+.hidden-thumb::-moz-range-thumb { opacity: 0; }
+input[type=range]::-webkit-slider-runnable-track { background: #ddd; }
+input[type=range]::-moz-range-track { background: #ddd; }
+</style>
+
+
+<h3>Scenario Evaluation</h3>
+<p>Please read the following scenario carefully.</p>
+
+{% if player.vignette_treatment == 1 %}
+
+<p>
+    You are a university student preparing for an important written exam.
+    The exam includes open-ended questions that require clear explanations.
+
+    While studying, you work on a practice exam question.
+    You write a first draft of an answer.
+    You are unsure whether your approach is correct and want to improve your answer before finalizing it.
+</p>
+
+<p>
+    You consult ChatGPT, an AI-based system designed to assist with academic questions.
+    After reviewing the question, the system provides a clear and well-structured answer and explains how to organize your reasoning effectively in the exam.
+
+</p>
+
+{% else %}
+
+<p>
+    You are a university student preparing for an important written exam.
+    The exam includes open-ended questions that require clear explanations.
+
+    While studying, you work on a practice exam question.
+    You write a first draft of an answer.
+    You are unsure whether your approach is correct and want to improve your answer before finalizing it.
+</p>
+
+<p>
+    You consult a course tutor who has experience grading exams for this course.
+    After reviewing the question, the tutor provides a clear and well-structured answer and explains how to organize your reasoning effectively in the exam.
+</p>
+
+{% endif %}
+
+    <hr>
+
+    <h4>Please answer the following questions based on the scenario above</h4>
+
+{% with form_field=form.use_advice %}
+    {% include "vignette_survey/slider.html" %}
+{% endwith %}
+
+{% with form_field=form.trust %}
+    {% include "vignette_survey/slider.html" %}
+{% endwith %}
+
+{% with form_field=form.attention_check %}
+    {% include "vignette_survey/slider.html" %}
+{% endwith %}
+
+{% with form_field=form.reliability %}
+    {% include "vignette_survey/slider.html" %}
+{% endwith %}
+
+{% with form_field=form.accuracy %}
+    {% include "vignette_survey/slider.html" %}
+{% endwith %}
+
+{% with form_field=form.competence %}
+    {% include "vignette_survey/slider.html" %}
+{% endwith %}
+
+{% with form_field=form.integrity %}
+    {% include "vignette_survey/slider.html" %}
+{% endwith %}
+
+{% with form_field=form.cognitive_support %}
+    {% include "vignette_survey/slider.html" %}
+{% endwith %}
+
+{% with form_field=form.persuasiveness %}
+    {% include "vignette_survey/slider.html" %}
+{% endwith %}
+
+{% with form_field=form.overreliance %}
+    {% include "vignette_survey/slider.html" %}
+{% endwith %}
+
+{% with form_field=form.confidence %}
+    {% include "vignette_survey/slider.html" %}
+{% endwith %}
+
+{% with form_field=form.responsibility %}
+    {% include "vignette_survey/slider.html" %}
+{% endwith %}
+
+{% with form_field=form.future_use %}
+    {% include "vignette_survey/slider.html" %}
+{% endwith %}
+
+<script>
+function answerGiven(slider) {
+    slider.classList.remove('hidden-thumb');
+    slider.dataset.answered = "true";
+}
+
+function validateSliders() {
+    const sliders = document.querySelectorAll('input[type="range"]');
+    for (let slider of sliders) {
+        if (!slider.dataset.answered) {
+            alert("Please answer all questions before continuing.");
+            return false;
+        }
+    }
+    return true;
+}
+</script>
+
+<button type="submit" onclick="return validateSliders();">Next</button>
+
+{% endblock %}

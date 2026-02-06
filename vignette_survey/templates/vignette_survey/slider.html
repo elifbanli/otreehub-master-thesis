@@ -1,0 +1,30 @@
+<label>{{ form_field.label }}</label><br>
+
+<input type="range"
+       name="{{ form_field.name }}"
+       min="1"
+       max="7"
+       value="4"
+       required
+       class="slider hidden-thumb"
+       onpointerdown="answerGiven(this)"
+       style="width: 100%; height: 30px;">
+
+
+<div style="display:flex; justify-content:space-between; font-size: 12px; margin-top: 4px;">
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+    <span>4</span>
+    <span>5</span>
+    <span>6</span>
+    <span>7</span>
+</div>
+
+<div style="display:flex; justify-content:space-between; font-size: 12px; margin-top: 2px;">
+    <span>Strongly disagree</span>
+    <span><em>Neither agree nor disagree</em></span>
+    <span>Strongly agree</span>
+</div>
+
+<br><br>

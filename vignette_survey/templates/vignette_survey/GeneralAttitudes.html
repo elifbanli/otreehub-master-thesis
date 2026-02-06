@@ -1,0 +1,57 @@
+{% block content %}
+
+<style>
+.hidden-thumb::-webkit-slider-thumb { opacity: 0; }
+.hidden-thumb::-moz-range-thumb { opacity: 0; }
+input[type=range]::-webkit-slider-runnable-track { background: #ddd; }
+input[type=range]::-moz-range-track { background: #ddd; }
+</style>
+
+
+<h3>General Attitudes</h3>
+<p>Please indicate how much you agree with the following statements.</p>
+
+{% with form_field=form.ai_familiarity %}
+    {% include "vignette_survey/slider.html" %}
+{% endwith %}
+
+{% with form_field=form.tech_trust %}
+    {% include "vignette_survey/slider.html" %}
+{% endwith %}
+
+{% with form_field=form.risk_attitude %}
+    {% include "vignette_survey/slider.html" %}
+{% endwith %}
+
+<hr>
+
+<label>{{ form.comment.label }}</label><br>
+
+<textarea name="comment"
+          rows="4"
+          style="width: 100%;"
+          placeholder="You can leave this blank if you wish."></textarea>
+
+<br><br>
+
+<script>
+function answerGiven(slider) {
+    slider.classList.remove('hidden-thumb');
+    slider.dataset.answered = "true";
+}
+
+function validateSliders() {
+    const sliders = document.querySelectorAll('input[type="range"]');
+    for (let slider of sliders) {
+        if (!slider.dataset.answered) {
+            alert("Please answer all questions before continuing.");
+            return false;
+        }
+    }
+    return true;
+}
+</script>
+
+<button type="submit" onclick="return validateSliders();">Next</button>
+
+{% endblock %}
