@@ -6,14 +6,37 @@
 input[type=range]::-webkit-slider-runnable-track { background: #ddd; }
 input[type=range]::-moz-range-track { background: #ddd; }
 
-/* NEW: spacing tweaks */
-h3 { margin-bottom: 18px; }             
-h3 + p { margin-top: 0; margin-bottom: 18px; }
+/* ===== SPACING: Scenario ===== */
+h3 { margin-bottom: 22px; }
+h3 + p { margin-top: 0; margin-bottom: 22px; }
 
-.scenario-text p { margin-bottom: 16px; } 
-hr { margin: 28px 0; }
-h4 { margin-top: 0; margin-bottom: 18px; }
+.scenario-text p {
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+/* Scenario and questions */
+hr { margin: 40px 0; }
+
+h4 { margin-top: 0; margin-bottom: 24px; }
+
+/* ===== SPACING: Slider blocks ===== */
+/* slider.html'de label artık block olsun ve slider ile arası açılsın */
+label { 
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Her slider bloğunun altına ekstra boşluk ver */
+input[type="range"] {
+    margin-top: 6px;
+    margin-bottom: 18px;
+}
+
+/* Likert sayı satırları ve metin satırlarını birbirinden ve bir sonraki sorudan ayır */
+.likert-scale { margin-top: 6px; margin-bottom: 26px; }
 </style>
+
 
 
 <h3>Scenario</h3>
