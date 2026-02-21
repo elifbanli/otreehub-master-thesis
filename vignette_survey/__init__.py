@@ -9,18 +9,8 @@ class C(BaseConstants):
 
 class Subsession(BaseSubsession):
     def creating_session(self):
-        players = self.get_players()
-        treatments = [1, 2] * (len(players) // 2)
-
-        # randomization
-        if len(players) % 2 == 1:
-            treatments.append(random.choice([1, 2]))
-
-        random.shuffle(treatments)
-
-        for p, t in zip(players, treatments):
-            p.vignette_treatment = t
-
+        for p in self.get_players():
+            p.vignette_treatment = random.choice([1, 2])
 
 
 class Group(BaseGroup):
@@ -222,6 +212,12 @@ class Vignette(Page):
         'responsibility',
         'future_use',
     ]
+
+    @staticmethod
+    def vars_for_template(player: Player):
+        if not player.vignette_treatment:
+            player.vignette_treatment = random.choice([1, 2])
+        return dict()
 
     def before_next_page(self, timeout_happened):
         if self.attention_check != 6:
