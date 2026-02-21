@@ -18,7 +18,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    vignette_treatment = models.IntegerField()
+    vignette_treatment = models.IntegerField(initial=0)
     
     # --- DEMOGRAPHICS ---
 
@@ -214,10 +214,10 @@ class Vignette(Page):
     ]
 
     @staticmethod
-    def vars_for_template(player: Player):
-        if not player.vignette_treatment:
-            player.vignette_treatment = random.choice([1, 2])
-        return dict()
+    def vars_for_template(player):
+    if player.vignette_treatment == 0:
+        player.vignette_treatment = random.choice([1, 2])
+    return {}
 
     def before_next_page(self, timeout_happened):
         if self.attention_check != 6:
