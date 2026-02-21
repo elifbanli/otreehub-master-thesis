@@ -8,9 +8,13 @@ class C(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    def creating_session(self):
-        for p in self.get_players():
-            p.vignette_treatment = random.choice([1, 2])
+    pass
+
+
+def creating_session(subsession: Subsession):
+    # oTree'nin önerdiği pattern: global function
+    for p in subsession.get_players():
+        p.vignette_treatment = random.choice([1, 2])
 
 
 class Group(BaseGroup):
@@ -19,6 +23,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     vignette_treatment = models.IntegerField(initial=0)
+
     
     # --- DEMOGRAPHICS ---
 
@@ -213,15 +218,11 @@ class Vignette(Page):
         'future_use',
     ]
 
-    @staticmethod
-    def vars_for_template(player):
-    if player.vignette_treatment == 0:
-        player.vignette_treatment = random.choice([1, 2])
-    return {}
 
-    def before_next_page(self, timeout_happened):
-        if self.attention_check != 6:
-            self.attention_failed = True
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        if player.attention_check != 6:
+            player.attention_failed = True
 
 
 class GeneralAttitudes(Page):
