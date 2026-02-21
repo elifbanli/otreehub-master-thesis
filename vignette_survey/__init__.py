@@ -28,7 +28,8 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    vignette_treatment = models.IntegerField(initial=0)
+    vignette_treatment = models.IntegerField()
+    
     # --- DEMOGRAPHICS ---
 
     age = models.IntegerField(
